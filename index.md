@@ -1,3 +1,12 @@
-# Administración de Sistermas Informáticos en Red
+# Administración de Sistemas Operativos
 
-david bernardo marchal **xxxxxxxxxxxxxxxxx**
+Repositorio de las prácticas de ASO.
+
+## Unidades de trabajo
+
+- [UT01](ut01/index.md)
+- [UT02](ut02/index.md)
+
+## Repositorio en GitHub
+
+[Ver repositorio en GitHub](https://davidbernar15.github.io/aso_2026_dbm/)
