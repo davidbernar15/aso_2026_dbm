@@ -1,5 +1,7 @@
-- [Índice del curso][def]
+# Unidad de Trabajo 3
+
+- [Práctica 3](pr0303/pr0303.md)
 
 ---
 
-[Volver al inicio del curso](../../index.md)
+[Volver al inicio](../index.md)
