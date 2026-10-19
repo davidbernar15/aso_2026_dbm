@@ -1,6 +1,6 @@
-# Administración de Sistemas Operativos
+# Administración de ASO
 
-Repositorio de las prácticas de ASO.
+Repositorio de las prácticas de ASO
 
 ## Unidades de trabajo
 
@@ -11,4 +11,4 @@ Repositorio de las prácticas de ASO.
 
 ## Repositorio en GitHub
 
-[Ver repositorio en GitHub](https://davidbernar15.github.io/aso_2026_dbm/)
+[Ver repositorio en GitHub](https://github.com/davidbernar15/aso_2026_dbm.git)
