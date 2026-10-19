@@ -1,2 +1,2 @@
 
-[Volver al inicio](index.md)
+[Volver al inicio del curso](../../index.md)

@@ -2,4 +2,4 @@
 
 ---
 
-[Volver al inicio]
+[Volver al inicio del curso](../../index.md)
