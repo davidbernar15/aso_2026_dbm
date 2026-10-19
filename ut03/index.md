@@ -1,5 +1,5 @@
-- [Índice del curso](index.md)
+- [Índice del curso][def]
 
 ---
 
-[Volver al inicio](index.md)
+[Volver al inicio]
