@@ -1,6 +1,6 @@
 # Unidad de Trabajo 2
 
-- [Práctica 2](pr0202/pr0202.md)
+- [Práctica 2](pr0102/pr0102.md)
 
 ---
 
