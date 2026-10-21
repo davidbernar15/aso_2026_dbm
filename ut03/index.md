@@ -1,6 +1,7 @@
 # Unidad de Trabajo 3
 
-- [Práctica 3](pr0103/pr0103.md)
+- [Práctica 0301](pr0301/pr0301.md)
+- [Práctica 0303](pr0303/pr0303.md)
 
 ---
 
