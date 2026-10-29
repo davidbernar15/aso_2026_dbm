@@ -1,8 +1,12 @@
-[long]$tamanoBackup = 2199023255552
+$fechaActual = Get-Date
 
-[decimal]$costeLicencia = 149.95
-[decimal]$iva = 31.49
+Write-Host "Año actual: $($fechaActual.Year)"
+Write-Host "Caducidad de la contraseña: $($fechaActual.AddDays(45))"
 
-$totalFactura = $costeLicencia + $iva
+$inicio = Get-Date
+Start-Sleep -Seconds 3
+$fin = Get-Date
 
-Write-Host "Total de la factura: $totalFactura euros"
+[TimeSpan]$tiempoTotal = $fin - $inicio
+
+Write-Host "Segundos transcurridos: $($tiempoTotal.TotalSeconds)"
