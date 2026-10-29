@@ -1,13 +1,8 @@
-[int]$maxConexiones = 100
-[bool]$firewallActivo = $true 
+[long]$tamanoBackup = 2199023255552
 
-$maxConexiones = "Cien"
+[decimal]$costeLicencia = 149.95
+[decimal]$iva = 31.49
 
-# No se puede convertir el valor "Cien" al tipo "System.Int32". Error: "La cadena de entrada no tiene el 
-# formato correcto."
-# En C:\Users\david.bermar.4\Desktop\practicas\cloud\Practicas_aso\powershell\script.ps1: 4 Carácter: 1
-# + $maxConexiones = "Cien"
-# + ~~~~~~~~~~~~~~~~~~~~~~~
-#    + CategoryInfo          : MetadataError: (:) [], ArgumentTransformationMetadataException
-#    + FullyQualifiedErrorId : RuntimeException
- 
+$totalFactura = $costeLicencia + $iva
+
+Write-Host "Total de la factura: $totalFactura euros"
