@@ -1,0 +1,4 @@
+﻿"ID","Fecha","Usuario","Gravedad","Accion"
+"9921","2023-11-01 10:05","guest_user","error","auth_fail (pass)"
+"8843","2023-11-01 10:15","dev_team","warn","upload_limit_exceeded"
+"1001","2023-11-01 10:20","administrator","critical","service_stop"
