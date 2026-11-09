@@ -1,0 +1,5 @@
+﻿#TYPE System.Management.Automation.PSCustomObject
+"Timesstamp","severity","User","EventID","Action"
+"01/11/2023 10:05:53","ERROR","guest_user","9921","Auth_Fail (Pass)"
+"01/11/2023 10:15:53","WARN","dev_team","8843","Upload_Limit_Exceeded"
+"01/11/2023 10:20:53","CRITICAL","administrador","1001","Service_Stop"

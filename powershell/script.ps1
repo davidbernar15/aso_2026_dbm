@@ -6,52 +6,63 @@ $logCrudo = @"
 [CRITICAL] ID:1001 :: 01-11-2023_10:20 :: User:ROOT :: Action:Service_Stop
 "@
 
-$lineas = $logCrudo -split "`r?`n"
-$resultados = @()
+$lineas=$logCrudo.Split("`n")
 
-foreach ($linea in $lineas) {
+$reportes=foreach($linea in $lineas){
+    if ($linea.Substring(1,4) -eq "INFO") {
+        continue
+    }
+    $partes=$linea -split "::"
+    $id=$partes[0]
+    $fecha=$partes[1]
+    $user=$partes[2]
+    $accion=$partes[3]
 
-    if ($linea -match '^\[(.*?)\]\s*ID:(\d+)\s*::\s*(.*?)\s*::\s*User:(.*?)\s*::\s*Action:(.*)$') {
 
-        $gravedad = $matches[1].ToLower()
-        $id = $matches[2]
-        $fechaOriginal = $matches[3]
-        $usuario = $matches[4].ToLower()
-        $accion = $matches[5].ToLower()
 
-        # Ignorar INFO
-        if ($gravedad -eq "info") {
-            continue
-        }
 
-        # Corregir fechas
-        if ($fechaOriginal -match '^(\d{4})/(\d{2})/(\d{2})_(\d{2}):(\d{2})$') {
-            $fecha = "$($matches[1])-$($matches[2])-$($matches[3]) $($matches[4]):$($matches[5])"
-        }
-        elseif ($fechaOriginal -match '^(\d{4})-(\d{2})-(\d{2}) (\d{2}):(\d{2})$') {
-            $fecha = $fechaOriginal
-        }
-        elseif ($fechaOriginal -match '^(\d{2})-(\d{2})-(\d{4})_(\d{2}):(\d{2})$') {
-            $fecha = "$($matches[3])-$($matches[2])-$($matches[1]) $($matches[4]):$($matches[5])"
-        }
 
-        # Cambiar ROOT por administrator
-        if ($usuario -eq "root") {
-            $usuario = "administrator"
-        }
+    $id=$id.replace("[","").replace("]","").replace("ID:","")
+    $fallo=$id.Split(" ")[0]
+    $identificador=$id.split(" ")[1]
 
-        # Crear objeto
-        $objeto = [PSCustomObject]@{
-            ID       = $id
-            Fecha    = $fecha
-            Usuario  = $usuario
-            Gravedad = $gravedad
-            Accion   = $accion
-        }
 
-        $resultados += $objeto
+    $fecha_hora=$fecha.Replace("_"," ").replace("/","-")
+    $fecha_list=$fecha_hora.trim().Split(" ")
+    $fecha=$fecha_list[0]
+    $hora=$fecha_list[1]
+
+    $horas=$hora.split(":")[0]
+    $minutos=$hora.split(":")[1]
+
+    if ($fecha[2] -eq "-") {
+        $dia=$fecha.Split("-")[0]
+        $mes=$fecha.Split("-")[1]
+        $anio=$fecha.Split("-")[2]
+    } else {
+        $dia=$fecha.Split("-")[2]
+        $mes=$fecha.Split("-")[1]
+        $anio=$fecha.Split("-")[0]        
+    }
+    $fechalimpia=Get-Date -Year $anio -Month $mes -day $dia -Hour $horas -Minute $minutos
+
+
+    $user=$user.ToLower().replace("user:","").trim()
+    if ($user -eq "root") {
+        $user=$user.Replace("root","administrador")
+    }
+
+
+    $accion=$accion.replace("Action:", "").trim()
+
+
+
+    [PSCustomObject]@{
+        Timesstamp = $fechalimpia
+        severity = $fallo
+        User = $user
+        EventID = $identificador
+        Action = $accion
     }
 }
-
-# Exportar a CSV
-$resultados | Export-Csv -Path "reporte_seguridad.csv" -NoTypeInformation -Encoding UTF8
+$reportes | Export-Csv "reporte_seguridad.csv" -Encoding UTF8
