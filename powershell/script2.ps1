@@ -23,7 +23,7 @@ foreach($linea in $lineas){
     $subruta=$ruta.Split("?")[1]
 
     $ip2=$ip2.Replace("]","")
-    if
+    
 }
 
 
