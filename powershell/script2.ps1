@@ -7,24 +7,48 @@ GET /api/v1/user/profile?id=9921&token=xyz [IP: 192.168.10.102] [Agent: Firefox/
 
 $lineas=$logsWeb.split("`n")
 
-foreach($linea in $lineas){
+$auditoria=foreach($linea in $lineas){
     $partes = $linea -split " "
-    $objeto = $partes[0]
-    $ruta = $partes[1]
-    $ip = $partes[2]
-    $ip2 = $partes[3]
-    $agente = $partes[4]
-    $agente2 = $partes[5]    
-    $fallo = $partes[6]
+    $objeto = $partes[0].trim()
+    $ruta = $partes[1].trim()
+    $ip = $partes[2].trim()
+    $ip2 = $partes[3].trim()
+    $agente = $partes[4].trim()
+    $agente2 = $partes[5].trim() 
+    $fallo = $partes[6].trim()
 
 #POST /api/v1/auth/login?session=a8f93j2&token=expired
 
     $rutalimpia=$ruta.split("?")[0]
     $subruta=$ruta.Split("?")[1]
+    
+#[IP: 192.168.10.102]
 
     $ip2=$ip2.Replace("]","")
-    
+
+#[Agent: Mozilla/5.0]
+
+    $agente2=$agente2.Replace("]","")
+
+#[ERR-0403-FORBIDDEN]
+
+    $fallo1=$fallo.Split("-")[0]
+    $fallolimpio=$fallo.Split("-")[1]
+    $fallo3=$fallo.Split("-")[2]
+
+
+    [PSCustomObject]@{
+        method = $objeto
+        CleanPath = $rutalimpia
+        MaskedIP = $ip2
+        ErrorCode = $fallolimpio
+        Agent = $agente2
+    }
+
+
 }
+
+$auditoria | Export-Csv "auditoria_web.csv" -Encoding UTF8
 
 
     
