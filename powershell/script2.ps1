@@ -18,8 +18,11 @@ $auditoria=foreach($linea in $lineas){
     $agente2 = $partes[5].trim() 
     $fallo = $partes[6].trim()
 
-#POST /api/v1/auth/login?session=a8f93j2&token=expired
+    $fallo1=$fallo.Split("-")[0]
+    $fallolimpio=$fallo.Split("-")[1]
+    $fallo3=$fallo.Split("-")[2]
 
+    if ($fallo3 -ne "OK]") {
     $rutalimpia=$ruta.split("?")[0]
     $subruta=$ruta.Split("?")[1]
     
@@ -42,9 +45,6 @@ $auditoria=foreach($linea in $lineas){
 
 #[ERR-0403-FORBIDDEN]
 
-    $fallo1=$fallo.Split("-")[0]
-    $fallolimpio=$fallo.Split("-")[1]
-    $fallo3=$fallo.Split("-")[2]
 
 
 
@@ -56,10 +56,14 @@ $auditoria=foreach($linea in $lineas){
         Agent = $agente2
     }
 
+    }
+
+
+
 
 }
 
-$auditoria | Export-Csv "auditoria_web.csv" -Encoding UTF8
+$auditoria | Export-Csv "auditoria_web.csv" -Encoding UTF8 -NoTypeInformation
 
 
     
