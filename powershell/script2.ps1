@@ -8,6 +8,7 @@ GET /api/v1/user/profile?id=9921&token=xyz [IP: 192.168.10.102] [Agent: Firefox/
 $lineas=$logsWeb.split("`n")
 
 $auditoria=foreach($linea in $lineas){
+    
     $partes = $linea -split " "
     $objeto = $partes[0].trim()
     $ruta = $partes[1].trim()
@@ -25,16 +26,26 @@ $auditoria=foreach($linea in $lineas){
 #[IP: 192.168.10.102]
 
     $ip2=$ip2.Replace("]","")
+    $primerocteto=$ip2.Split(".")[0]
+    $segundoocteto=$ip2.Split(".")[1]
+    $tercerocteto=$ip2.Split(".")[2]
+    $cuartocteto=$ip2.Split(".")[3]
+
+    $cuartocteto = "***"
+
+    $ip2 = "$primerocteto.$segundoocteto.$tercerocteto.$cuartocteto"
 
 #[Agent: Mozilla/5.0]
 
     $agente2=$agente2.Replace("]","")
+
 
 #[ERR-0403-FORBIDDEN]
 
     $fallo1=$fallo.Split("-")[0]
     $fallolimpio=$fallo.Split("-")[1]
     $fallo3=$fallo.Split("-")[2]
+
 
 
     [PSCustomObject]@{
