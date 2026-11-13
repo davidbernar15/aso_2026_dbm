@@ -1,0 +1,54 @@
+## Script
+
+$logsWeb = @"
+POST /api/v1/auth/login?session=a8f93j2&token=expired [IP: 192.168.10.45] [Agent: Mozilla/5.0] [ERR-0040-AUTH]
+GET /api/v2/products/search?q=laptop&sort=asc [IP: 10.0.2.15] [Agent: Chrome/110.0] [ERR-0200-OK]
+DELETE /api/v1/admin/drop_table?confirm=true&force=1 [IP: 172.16.254.88] [Agent: ScriptBot/1.2] [ERR-0500-FATAL]
+GET /api/v1/user/profile?id=9921&token=xyz [IP: 192.168.10.102] [Agent: Firefox/109.0] [ERR-0403-FORBIDDEN]
+"@
+
+$lineas=$logsWeb.split("`n")
+
+$auditoria=foreach($linea in $lineas){
+    $partes = $linea -split " "
+    $objeto = $partes[0].trim()
+    $ruta = $partes[1].trim()
+    $ip = $partes[2].trim()
+    $ip2 = $partes[3].trim()
+    $agente = $partes[4].trim()
+    $agente2 = $partes[5].trim() 
+    $fallo = $partes[6].trim()
+
+#POST /api/v1/auth/login?session=a8f93j2&token=expired
+
+    $rutalimpia=$ruta.split("?")[0]
+    $subruta=$ruta.Split("?")[1]
+    
+#[IP: 192.168.10.102]
+
+    $ip2=$ip2.Replace("]","")
+
+#[Agent: Mozilla/5.0]
+
+    $agente2=$agente2.Replace("]","")
+
+#[ERR-0403-FORBIDDEN]
+
+    $fallo1=$fallo.Split("-")[0]
+    $fallolimpio=$fallo.Split("-")[1]
+    $fallo3=$fallo.Split("-")[2]
+
+
+    [PSCustomObject]@{
+        method = $objeto
+        CleanPath = $rutalimpia
+        MaskedIP = $ip2
+        ErrorCode = $fallolimpio
+        Agent = $agente2
+    }
+
+
+}
+
+$auditoria | Export-Csv "auditoria_web.csv" -Encoding UTF8
+
