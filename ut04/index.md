@@ -5,6 +5,7 @@
 - [Práctica 0403](pr0403/pr0403.md)
 - [Práctica 0404](pr0404/pr0404.md)
 - [Práctica 0405](pr0405/pr0405.md)
+- [Práctica 0406](pr0406/pr0406.md)
 
 ---
 
