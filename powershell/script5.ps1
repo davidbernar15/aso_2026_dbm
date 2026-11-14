@@ -52,14 +52,15 @@ $inventario=foreach($linea in $lineas){
         $snsalida=$sn.PadLeft(6,"0")
 
         [PSCustomObject]@{
-            method = $objeto
-            CleanPath = $rutalimpia
-            MaskedIP = $ip2
-            ErrorCode = $fallolimpio
-            Agent = $agente2
-
+            Device = $equipos
+            MAC = $macsalida
+            RAM = $ram
+            SerialNumber = $snsalida
+            Status = $status
         }
 
     }
 
 }
+
+$inventario | Export-Csv "inventario_web.csv" -Encoding UTF8 -NoTypeInformation
